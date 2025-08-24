@@ -35,7 +35,12 @@ def predict_datapoint():
 
         predict_pipeline=predictPipeline()
         results=predict_pipeline.predict(pred_df)
-        return render_template('home.html', results=results[0])
+        results = round(results[0], 2)
+        if results > 100:
+            results = 100.00
+        elif results < 0:
+            results = 0.00
+        return render_template('home.html', results=results)
     
 
 if __name__=="__main__":
